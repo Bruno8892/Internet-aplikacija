@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AlgebraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Predbiljezba">
+          <Key>
+            <PropertyRef Name="IdPredbiljezba" />
+          </Key>
+          <Property Name="IdPredbiljezba" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adresa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdSeminar" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Seminar">
+          <Key>
+            <PropertyRef Name="IdSeminar" />
+          </Key>
+          <Property Name="IdSeminar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Datum" Type="date" />
+          <Property Name="Predavac" Type="nvarchar" MaxLength="50" />
+          <Property Name="Popunjen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="IdZaposlenik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Korisnik" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lozinka" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Predbiljezba_Seminar">
+          <End Role="Seminar" Type="Self.Seminar" Multiplicity="0..1" />
+          <End Role="Predbiljezba" Type="Self.Predbiljezba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seminar">
+              <PropertyRef Name="IdSeminar" />
+            </Principal>
+            <Dependent Role="Predbiljezba">
+              <PropertyRef Name="IdSeminar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AlgebraModelStoreContainer">
+          <EntitySet Name="Predbiljezba" EntityType="Self.Predbiljezba" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zaposlenik" EntityType="Self.Zaposlenik" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Predbiljezba_Seminar" Association="Self.FK_Predbiljezba_Seminar">
+            <End Role="Seminar" EntitySet="Seminar" />
+            <End Role="Predbiljezba" EntitySet="Predbiljezba" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AlgebraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Predbiljezba">
+          <Key>
+            <PropertyRef Name="IdPredbiljezba" />
+          </Key>
+          <Property Name="IdPredbiljezba" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Datum" Type="DateTime" Precision="100" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdSeminar" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Seminar" Relationship="Self.FK_Predbiljezba_Seminar" FromRole="Predbiljezba" ToRole="Seminar" />
+        </EntityType>
+        <EntityType Name="Seminar">
+          <Key>
+            <PropertyRef Name="IdSeminar" />
+          </Key>
+          <Property Name="IdSeminar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Datum" Type="DateTime" Precision="100" />
+          <Property Name="Predavac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Popunjen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Predbiljezbas" Relationship="Self.FK_Predbiljezba_Seminar" FromRole="Seminar" ToRole="Predbiljezba" />
+        </EntityType>
+        <EntityType Name="Zaposlenik">
+          <Key>
+            <PropertyRef Name="IdZaposlenik" />
+          </Key>
+          <Property Name="IdZaposlenik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Korisnik" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lozinka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Predbiljezba_Seminar">
+          <End Role="Seminar" Type="Self.Seminar" Multiplicity="0..1" />
+          <End Role="Predbiljezba" Type="Self.Predbiljezba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seminar">
+              <PropertyRef Name="IdSeminar" />
+            </Principal>
+            <Dependent Role="Predbiljezba">
+              <PropertyRef Name="IdSeminar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AlgebraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Predbiljezbas" EntityType="Self.Predbiljezba" />
+          <EntitySet Name="Seminars" EntityType="Self.Seminar" />
+          <EntitySet Name="Zaposleniks" EntityType="Self.Zaposlenik" />
+          <AssociationSet Name="FK_Predbiljezba_Seminar" Association="Self.FK_Predbiljezba_Seminar">
+            <End Role="Seminar" EntitySet="Seminars" />
+            <End Role="Predbiljezba" EntitySet="Predbiljezbas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AlgebraModelStoreContainer" CdmEntityContainer="AlgebraEntities">
+          <EntitySetMapping Name="Predbiljezbas">
+            <EntityTypeMapping TypeName="AlgebraModel.Predbiljezba">
+              <MappingFragment StoreEntitySet="Predbiljezba">
+                <ScalarProperty Name="IdPredbiljezba" ColumnName="IdPredbiljezba" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="IdSeminar" ColumnName="IdSeminar" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seminars">
+            <EntityTypeMapping TypeName="AlgebraModel.Seminar">
+              <MappingFragment StoreEntitySet="Seminar">
+                <ScalarProperty Name="IdSeminar" ColumnName="IdSeminar" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Predavac" ColumnName="Predavac" />
+                <ScalarProperty Name="Popunjen" ColumnName="Popunjen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zaposleniks">
+            <EntityTypeMapping TypeName="AlgebraModel.Zaposlenik">
+              <MappingFragment StoreEntitySet="Zaposlenik">
+                <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Korisnik" ColumnName="Korisnik" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

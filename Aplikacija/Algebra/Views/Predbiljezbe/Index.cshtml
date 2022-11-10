@@ -1,0 +1,92 @@
+﻿@if (Session["Korisnik"] != null)
+{
+    @model IEnumerable<Algebra.Models.Predbiljezba>
+
+    <br />
+    <br />
+    using (Html.BeginForm("Index", "Predbiljezbe", FormMethod.Get))
+    {
+        @Html.TextBox("searching")
+        <input type="submit" value="Pretraži">
+    }
+
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seminar.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Odaberi", "Edit", new { id = item.IdPredbiljezba }) |
+                    @Html.ActionLink("Obriši", "Delete", new { id = item.IdPredbiljezba })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seminar.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prezime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <br />
+    <br />
+    <tr>
+        <td colspan="8" style="color:red">
+            NISTE REGISTRIRANI!
+        </td>
+    </tr>
+    <br />
+    <br />
+}

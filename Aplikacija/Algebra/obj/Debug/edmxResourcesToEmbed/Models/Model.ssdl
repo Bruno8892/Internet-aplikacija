@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AlgebraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Predbiljezba">
+    <Key>
+      <PropertyRef Name="IdPredbiljezba" />
+    </Key>
+    <Property Name="IdPredbiljezba" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Datum" Type="date" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adresa" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdSeminar" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Seminar">
+    <Key>
+      <PropertyRef Name="IdSeminar" />
+    </Key>
+    <Property Name="IdSeminar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" />
+    <Property Name="Opis" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Datum" Type="date" />
+    <Property Name="Predavac" Type="nvarchar" MaxLength="50" />
+    <Property Name="Popunjen" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Zaposlenik">
+    <Key>
+      <PropertyRef Name="IdZaposlenik" />
+    </Key>
+    <Property Name="IdZaposlenik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+    <Property Name="Korisnik" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lozinka" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Predbiljezba_Seminar">
+    <End Role="Seminar" Type="Self.Seminar" Multiplicity="0..1" />
+    <End Role="Predbiljezba" Type="Self.Predbiljezba" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seminar">
+        <PropertyRef Name="IdSeminar" />
+      </Principal>
+      <Dependent Role="Predbiljezba">
+        <PropertyRef Name="IdSeminar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AlgebraModelStoreContainer">
+    <EntitySet Name="Predbiljezba" EntityType="Self.Predbiljezba" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seminar" EntityType="Self.Seminar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zaposlenik" EntityType="Self.Zaposlenik" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Predbiljezba_Seminar" Association="Self.FK_Predbiljezba_Seminar">
+      <End Role="Seminar" EntitySet="Seminar" />
+      <End Role="Predbiljezba" EntitySet="Predbiljezba" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

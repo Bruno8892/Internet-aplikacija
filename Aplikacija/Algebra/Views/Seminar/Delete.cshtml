@@ -1,0 +1,80 @@
+﻿@if (Session["Korisnik"] != null)
+{
+    @model Algebra.Models.Seminar
+
+    {
+        ViewBag.Title = "Delete";
+    }
+
+    <h2>Obriši</h2>
+
+    <h3>Jeste li sigurni da želite obrisati ovaj seminar?</h3>
+    <div>
+        <h4></h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Opis)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Opis)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Datum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Datum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Predavac)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Predavac)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Popunjen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Popunjen)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Obriši" class="btn btn-default" /> |
+                @Html.ActionLink("Nazad", "Index")
+            </div>
+        }
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <tr>
+        <td colspan="8" style="color:red">
+            NISTE REGISTRIRANI!
+        </td>
+    </tr>
+    <br />
+    <br />
+}

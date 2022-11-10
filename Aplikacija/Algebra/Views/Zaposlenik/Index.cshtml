@@ -1,0 +1,66 @@
+﻿@if (Session["Korisnik"] != null)
+{
+    @model IEnumerable<Algebra.Models.Zaposlenik>
+
+    {
+        ViewBag.Title = "Index";
+    }
+
+    <h2></h2>
+
+    <p>
+        @Html.ActionLink("Novi", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Korisnik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lozinka)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prezime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Korisnik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lozinka)
+                </td>
+                <td>
+                    @Html.ActionLink("Uredi", "Edit", new { id = item.IdZaposlenik }) |
+                    @Html.ActionLink("Obriši", "Delete", new { id = item.IdZaposlenik })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <br />
+    <br />
+    <tr>
+        <td colspan="8" style="color:red">
+            NISTE REGISTRIRANI!
+        </td>
+    </tr>
+    <br />
+    <br />
+}

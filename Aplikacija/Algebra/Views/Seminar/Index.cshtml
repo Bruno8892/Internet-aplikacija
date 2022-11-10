@@ -1,0 +1,93 @@
+﻿@if (Session["Korisnik"] != null)
+{
+    @model IEnumerable<Algebra.Models.Seminar>
+
+    <br />
+    <br />
+    using (Html.BeginForm("Index", "Seminar", FormMethod.Get))
+    {
+        @Html.TextBox("searching")
+        <input type="submit" value="Pretraži">
+    }
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Novi", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Predavac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Popunjen)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    Nema podataka
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naziv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opis)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Datum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Predavac)
+                    </td>
+                    <td>
+                        @if (item.Popunjen == "true")
+                        {
+                            @Html.CheckBox("Popunjen", true, new { @disabled = "disabled" })
+                        }
+                        else
+                        {
+                            @Html.CheckBox("Popunjen", false, new { @disabled = "disabled" })
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Uredi", "Edit", new { id = item.IdSeminar }) |
+                        @Html.ActionLink("Obriši", "Delete", new { id = item.IdSeminar })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}
+else
+{
+    <br />
+    <br />
+    <tr>
+        <td colspan="8" style="color:red">
+            NISTE REGISTRIRANI!
+        </td>
+    </tr>
+    <br />
+    <br />
+}

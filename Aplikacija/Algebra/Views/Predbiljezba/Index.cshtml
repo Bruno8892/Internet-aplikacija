@@ -1,0 +1,63 @@
+﻿
+    @model IEnumerable<Algebra.Models.Seminar>
+
+    <br />
+    <br />
+    @using (Html.BeginForm("Index", "Seminar", FormMethod.Get))
+    {
+        @Html.TextBox("searching")
+        <input type="submit" value="Pretraži">
+    }
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Predavac)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3" style="color:red">
+                    Nema podataka
+                </td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink("Odaberi", "Create", new { id = item.IdSeminar })</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naziv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opis)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Datum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Predavac)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+

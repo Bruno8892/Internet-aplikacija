@@ -1,0 +1,72 @@
+﻿@if (Session["Korisnik"] != null)
+{
+    @model Algebra.Models.Zaposlenik
+
+    {
+        ViewBag.Title = "Delete";
+    }
+
+    <h2>Obriši</h2>
+
+    <h3>Jeste li sigurni da želite obrisati ovog zaposlenika?</h3>
+    <div>
+        <h4>Zaposlenik</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Ime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Prezime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prezime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Korisnik)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Korisnik)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Lozinka)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lozinka)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Obriši" class="btn btn-default" /> |
+                @Html.ActionLink("Nazad", "Index")
+            </div>
+        }
+    </div>
+}
+else
+{
+    <br />
+    <br />
+    <tr>
+        <td colspan="8" style="color:red">
+            NISTE REGISTRIRANI!
+        </td>
+    </tr>
+    <br />
+    <br />
+}

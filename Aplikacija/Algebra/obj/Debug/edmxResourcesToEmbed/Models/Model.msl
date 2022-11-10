@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AlgebraModelStoreContainer" CdmEntityContainer="AlgebraEntities">
+    <EntitySetMapping Name="Predbiljezbas">
+      <EntityTypeMapping TypeName="AlgebraModel.Predbiljezba">
+        <MappingFragment StoreEntitySet="Predbiljezba">
+          <ScalarProperty Name="IdPredbiljezba" ColumnName="IdPredbiljezba" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="IdSeminar" ColumnName="IdSeminar" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seminars">
+      <EntityTypeMapping TypeName="AlgebraModel.Seminar">
+        <MappingFragment StoreEntitySet="Seminar">
+          <ScalarProperty Name="IdSeminar" ColumnName="IdSeminar" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Predavac" ColumnName="Predavac" />
+          <ScalarProperty Name="Popunjen" ColumnName="Popunjen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zaposleniks">
+      <EntityTypeMapping TypeName="AlgebraModel.Zaposlenik">
+        <MappingFragment StoreEntitySet="Zaposlenik">
+          <ScalarProperty Name="IdZaposlenik" ColumnName="IdZaposlenik" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Korisnik" ColumnName="Korisnik" />
+          <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
